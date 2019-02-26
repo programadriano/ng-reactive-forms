@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Login } from "./models/login";
 
 @Component({
@@ -10,8 +10,9 @@ import { Login } from "./models/login";
 export class AppComponent implements OnInit {
   title = "ng-reactive-forms";
   formCliente: FormGroup;
+  submitted = false;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.createForm(new Login());
@@ -19,14 +20,24 @@ export class AppComponent implements OnInit {
 
   createForm(login: Login) {
     this.formCliente = this.formBuilder.group({
-      email: [login.email],
-      password: [login.password],
+      email: [login.email, [Validators.required, Validators.email]],
+      password: [login.password, [Validators.required, Validators.minLength(6)]],
       remember: [login.remember]
     });
   }
 
+  get f() { return this.formCliente.controls; }
+
   onSubmit() {
-    console.log(this.formCliente.value);
-    this.formCliente.reset(new Login());
+    this.submitted = true;
+
+    if (this.formCliente.invalid) {
+      console.log(this.f)
+      console.log(this.f.email.errors.email)
+      return;
+    }
+
+    alert('SUCCESS' + JSON.stringify(this.formCliente.value))
+     this.formCliente.reset(new Login());
   }
 }
