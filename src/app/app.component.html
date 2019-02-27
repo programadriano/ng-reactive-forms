@@ -7,7 +7,7 @@
           <label for="email">Email:</label>
           <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" formControlName="email" />
 
-          <div *ngIf="submitted && f.email.errors" >
+          <div *ngIf="submitted && f.email.errors">
             <div *ngIf="f.email.errors.required">Email é obrigatório!</div>
             <div *ngIf="f.email.errors.email">Email invalido!</div>
           </div>
@@ -16,6 +16,10 @@
         <div class="form-group">
           <label for="pwd">Password:</label>
           <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" formControlName="password" />
+          <div *ngIf="submitted && f.email.errors">
+            <div *ngIf="f.password.errors.required">O campo senha é obrigatório!</div>
+            <div *ngIf="f.password.errors.minlength">A senha deve ter no mínimo 6 caracteres</div>
+          </div>
         </div>
         <div class="form-group form-check">
           <label class="form-check-label">
