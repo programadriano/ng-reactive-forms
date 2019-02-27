@@ -38,6 +38,6 @@ export class AppComponent implements OnInit {
     }
 
     alert('SUCCESS' + JSON.stringify(this.formCliente.value))
-     this.formCliente.reset(new Login());
+    this.formCliente.reset(new Login());
   }
 }
