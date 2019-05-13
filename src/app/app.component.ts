@@ -31,9 +31,7 @@ export class AppComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    if (this.formCliente.invalid) {
-      console.log(this.f)
-      console.log(this.f.email.errors.email)
+    if (this.formCliente.invalid) {      
       return;
     }
 
